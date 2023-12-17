@@ -1,0 +1,134 @@
+Sub gettime()
+'
+' gettime Macro
+'
+' Keyboard Shortcut: Ctrl+Shift+T
+'
+    Range("O2").Select
+    ActiveCell.FormulaR1C1 = "=RC[-1]-RC[-2]"
+    ActiveCell.Offset(0, -1).Select
+    Selection.End(xlDown).Select
+    ActiveCell.Offset(0, 1).Select
+    Range(Selection, Selection.End(xlUp)).Select
+    Selection.FillDown
+    
+'paste special
+    Selection.Copy
+    Selection.PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+
+'Get minutes(alt+de)
+    Selection.TextToColumns Destination:=Range("O2"), DataType:=xlDelimited, _
+    TextQualifier:=xlDoubleQuote, Other:=True, OtherChar _
+    :=":", FieldInfo:=Array(Array(1, 2), Array(2, 2), Array(3, 2)), _
+    TrailingMinusNumbers:=True
+    
+'Add time Column and paste time
+    Selection.Clear
+    Selection.Offset(0, 2).Select
+    Selection.Clear
+    Selection.Offset(0, -1).Select
+    Selection.Cut
+    ActiveCell.Offset(0, -3).Select
+    ActiveSheet.Paste
+    Selection.Copy
+    Selection.PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    Range("M1").Value = "Time"
+    Selection.HorizontalAlignment = xlCenter
+    
+    'Add Border
+    Selection.Borders(xlEdgeLeft).LineStyle = xlContinuous
+    Selection.Borders(xlEdgeTop).LineStyle = xlContinuous
+    Selection.Borders(xlEdgeBottom).LineStyle = xlContinuous
+    Selection.Borders(xlEdgeRight).LineStyle = xlContinuous
+    Selection.Borders(xlInsideVertical).LineStyle = xlContinuous
+    Selection.Borders(xlInsideHorizontal).LineStyle = xlContinuous
+    
+    'Make it general(alt+de)
+    Selection.TextToColumns Destination:=Range("M2"), DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, Tab:=True, _
+        Other:=True, OtherChar _
+        :=":", FieldInfo:=Array(1, 1), TrailingMinusNumbers:=True
+        
+    'delete end time
+    Range("N1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.ClearContents
+    
+
+     'add serial number
+    Range("B1").Select
+    Selection.EntireColumn.Insert
+    Selection.Value = "Sl no"
+    Range("B2").Value = 1
+    Range("B3").Value = "=IF(ISBLANK(C3),B2+1,1)"
+    Range("E1").Select
+    Selection.End(xlDown).Select
+    Selection.Offset(0, -3).Select
+    Range(Selection, Selection.End(xlUp)).Select
+    Selection.FillDown
+    Selection.Copy
+    Selection.PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+	
+    'Rearrange Columns
+    Range("B1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.Cut
+    Range("F1").Select
+    Selection.Insert Shift:=xlToRight
+    Range("F1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.Cut
+    Range("H1").Select
+    Selection.Insert Shift:=xlToRight
+    Range("M1:N1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.Cut
+    Range("J1").Select
+    Selection.Insert Shift:=xlToRight
+    
+    'alt+OCA
+    Selection.CurrentRegion.Select
+    Selection.Columns.AutoFit
+    
+    'fill blank cells
+    'fill blank cells of A and B
+    Range("D1").Select
+    Selection.End(xlDown).Select
+    Selection.Offset(0, -2).Select
+    Range(Selection, [b2]).Select
+    Selection.FillDown
+    Selection.End(xlDown).Select
+    Selection.Offset(0, -1).Select
+    Range(Selection, [a2]).Select
+    Selection.FillDown
+
+'Fill Batch (c) column
+    Range("D1").Select
+    Selection.End(xlDown).Select
+    Selection.Offset(0, -1).Select
+    Range(Selection, [c2]).Select
+    Selection.NumberFormat = "General"
+    Selection.SpecialCells(xlCellTypeBlanks).Select
+    Application.CutCopyMode = False
+    Selection.Value = "=R[-1]C"
+    Range("c2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.Copy
+    Selection.PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    Range("A1").Select
+    
+    'add pivot tabel
+
+    
+    
+    
+
+End Sub
+
+#to add serial number
+=IF(ISBLANK(C3), B2 + 1, 1)
+
