@@ -123,10 +123,6 @@ Sub gettime()
     
     'add pivot tabel
 
-    
-    
-    
-
 End Sub
 
 #to add serial number
