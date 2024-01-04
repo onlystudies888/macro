@@ -1,0 +1,7 @@
+Private Sub Worksheet_Change(ByVal Target As Range)
+Application.EnableEvents = False
+    If Not Intersect(Target, Me.UsedRange) Is Nothing Then
+"enter code"
+end if
+Application.EnableEvents = True
+end sub
