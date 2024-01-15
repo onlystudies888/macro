@@ -1,17 +1,21 @@
 Sub fillevery()
-
-'to sort
-
 ActiveCell.CurrentRegion.Select
 With Selection
 .Sort Key1:=.Columns(7), Order1:=xlAscending, Header:=xlYes
 End With
-
-
 [c1].Select
 Selection.End(xlDown).Select
 Dim x As Integer
 x = ActiveCell.Row
+Dim z As Double
+z = [c2].Value
+Dim four As String
+Dim ftwo As String
+Dim stwo As String
+four = Left(z, 4)
+ftwo = Mid(z, 5, 2)
+stwo = Mid(z, 7, 2)
+[d2].Value = four & "-" & ftwo & "-" & stwo & "-" & 0
 Range("D" & x).Select
 Range(Selection, Selection.End(xlUp)).Select
 Selection.FillDown
@@ -33,14 +37,12 @@ Selection.PasteSpecial Paste:=xlPasteValues
 Next i
 Application.CutCopyMode = False
 [n2].Select
-
-'to sort
-
 ActiveCell.CurrentRegion.Select
 With Selection
 .Sort Key1:=.Columns(14), Order1:=xlAscending, Header:=xlYes
 End With
+[n2].Select
+Range(Selection, Selection.End(xlDown)).Select
 Selection.Clear
 [a1].Select
-
 End Sub
