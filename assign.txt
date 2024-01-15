@@ -1,0 +1,45 @@
+Sub fillevery()
+
+'to sort
+
+ActiveCell.CurrentRegion.Select
+With Selection
+.Sort Key1:=.Columns(7), Order1:=xlAscending, Header:=xlYes
+End With
+
+
+[c1].Select
+Selection.End(xlDown).Select
+Dim x As Integer
+x = ActiveCell.Row
+Range("D" & x).Select
+Range(Selection, Selection.End(xlUp)).Select
+Selection.FillDown
+For i = 2 To x
+Range("A" & i).Value = "EMM"
+Range("B" & i).Value = "MYS"
+Range("I" & i).Value = "1"
+Range("J" & i).Value = "Completed"
+Range("N" & i).Value = i - 1
+Next i
+
+[n2].Select
+Range(Selection, Selection.End(xlDown)).Select
+Selection.Copy
+For i = 1 To 4
+Selection.End(xlDown).Select
+Selection.Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+Next i
+Application.CutCopyMode = False
+[n2].Select
+
+'to sort
+
+ActiveCell.CurrentRegion.Select
+With Selection
+.Sort Key1:=.Columns(14), Order1:=xlAscending, Header:=xlYes
+End With
+
+
+End Sub
