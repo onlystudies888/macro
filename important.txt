@@ -1,0 +1,13 @@
+' to make texts bold in column a and b
+Columns("A:B").Font.Bold = True
+
+'to select all active cells
+ActiveCell.CurrentRegion.Select
+
+'to paste special
+Range("A1").PasteSpecial Paste:=xlPasteValues
+
+'to remove copy CutCopyMode
+Application.CutCopyMode = False
+
+'
