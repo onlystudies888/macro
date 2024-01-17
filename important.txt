@@ -13,8 +13,16 @@ Application.CutCopyMode = False
 'transfer files to email
 https://www.transfernow.net/en
 
-'to add broder and align Center
+'to add broder
 Selection.CurrentRegion.Select
 Selection.Borders.LineStyle = xlContinuous
+
+'to align Center
 Selection.HorizontalAlignment = xlCenter
 Selection.VerticalAlignment = xlCenter
+
+'to clear format
+Selection.ClearFormats
+
+'to AutoFit
+Selection.Columns.AutoFit
